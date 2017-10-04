@@ -71,13 +71,13 @@ def index():
         return render_template("index.html" ,complaint_types=complaint_types,Man_zipcodes= Man_zipcodes, complain_times = complain_times, complain_agencys = complain_agencys)
     else:
         app.vars['complaint_type'] = request.form["complaint_type"]
-        app.vars['zipcode'] = request.form["zipcode"]
-        app.vars['time'] = request.form["time"]
-        app.vars['agency'] = request.form["agency"]
-
-        com[app.vars['complaint_type'] ] = 1
-        zip[app.vars['zipcode'] ] = 1
-        ang[app.vars['agency']] = 1
+#        app.vars['zipcode'] = request.form["zipcode"]
+#        app.vars['time'] = request.form["time"]
+#        app.vars['agency'] = request.form["agency"]
+#
+#        com[app.vars['complaint_type'] ] = 1
+#        zip[app.vars['zipcode'] ] = 1
+#        ang[app.vars['agency']] = 1
         return redirect('/result')
 #        return render_template("model.html")
 
