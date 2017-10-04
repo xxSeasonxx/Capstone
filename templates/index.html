@@ -10,6 +10,8 @@
 
     <title>The Data Incubator</title>
 
+    <link rel="stylesheet" href="static/nice-select.css">
+        
     <!-- Bootstrap core CSS -->
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -66,27 +68,63 @@
         <div class="intro-text">
           <div class="intro-lead-in"> New York City Complains Analysis </div>
           <div class="intro-heading"> Will your complains be resolved? </div>
-          <a class="btn btn-xl js-scroll-trigger" href="#prediction"> Let's Find Out </a>
+<!--          <form id='index' method='post' >-->
+          <a class="btn btn-xl js-scroll-trigger" href="#prediction"> Let's Find Out  </a>
+<!--          <p>-->
+<!--          <input type='submit' value='Submit' />-->
+<!--          </p>-->
+<!--          </form>-->
         </div>
       </div>
     </header>
-    
+
     <!-- Prediction -->
     <section id="prediction">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Please select your complain type:</h2>
-                    <h3 class="section-subheading text-muted"> <select name="feature_name">
-                        {% for feature in feature_names %}
-                        {% if feature == current_feature_name %}
-                        <option selected value="{{ feature }}">{{ feature }}</option>
-                        {% else %}
+                    <form id='index' method='post' >
+                    <h4 class="service-heading">Please select your complain type:</h4>
+<!--                    <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required data-validation-required-message="Please enter your phone number.">-->
+                    <h3 class="section-subheading text-muted">
+                    <select class="middle" name="complaint_type">
+                        {% for feature in complaint_types %}
                         <option value="{{ feature }}">{{ feature }}</option>
-                        {% endif %}
-                        {% endfor %} </h3>
+                        {% endfor %}
                     </select>
-                    </p>
+                    </h3>
+                    <h4 class="service-heading">Further Detail of your complaint</h4>
+                     <h3 class="section-subheading text-muted">
+                         Zipcode: <select name="zipcode">
+                            {% for zipcode in Man_zipcodes %}
+                            <option value = "{{ zipcode }}"> {{ zipcode }} </option>
+                            {% endfor %}
+                        </select>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                         Time: <select name="time">
+                            {% for time in complain_times %}
+                            <option value = "{{ time }}"> {{ time }} </option>
+                            {% endfor %}
+                        </select>
+                         &nbsp;
+                         &nbsp;
+                         &nbsp;
+                         &nbsp;
+                         Department: <select name="agency">
+                             {% for agency in complain_agencys %}
+                             <option value = "{{ agency }}"> {{ agency }} </option>
+                             {% endfor %}
+                         </select>
+
+                    </h3>
+<!--                      <p>-->
+                      <input type='submit' value='Submit' />
+<!--                      </p>-->
+<!--                    </p>-->
+                    </form>
                 </div>
             </div>
             
@@ -129,7 +167,7 @@
         <div class="row">
           <div class="col-lg-12 text-center">
             <h2 class="section-heading">Analysis</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            <h3 class="section-subheading text-muted">Here we perform graphical analysis on our data and result</h3>
           </div>
         </div>
         <div class="row">
@@ -143,8 +181,8 @@
               <img class="img-fluid" src="static/img/portfolio/01-thumbnail.jpg" alt="">
             </a>
             <div class="portfolio-caption">
-              <h4>Threads</h4>
-              <p class="text-muted">Illustration</p>
+              <h4> Most Complain by City </h4>
+              <p class="text-muted">Bar</p>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 portfolio-item">
@@ -157,8 +195,8 @@
               <img class="img-fluid" src="static/img/portfolio/02-thumbnail.jpg" alt="">
             </a>
             <div class="portfolio-caption">
-              <h4>Explore</h4>
-              <p class="text-muted">Graphic Design</p>
+              <h4> Traffic by Location </h4>
+              <p class="text-muted">Map</p>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 portfolio-item">
@@ -171,8 +209,8 @@
               <img class="img-fluid" src="static/img/portfolio/03-thumbnail.jpg" alt="">
             </a>
             <div class="portfolio-caption">
-              <h4>Finish</h4>
-              <p class="text-muted">Identity</p>
+              <h4> Resolution by City </h4>
+              <p class="text-muted">Bar</p>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 portfolio-item">
@@ -185,8 +223,8 @@
               <img class="img-fluid" src="static/img/portfolio/04-thumbnail.jpg" alt="">
             </a>
             <div class="portfolio-caption">
-              <h4>Lines</h4>
-              <p class="text-muted">Branding</p>
+              <h4> Resolution by Location </h4>
+              <p class="text-muted">Map</p>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 portfolio-item">
@@ -199,8 +237,8 @@
               <img class="img-fluid" src="static/img/portfolio/05-thumbnail.jpg" alt="">
             </a>
             <div class="portfolio-caption">
-              <h4>Southwest</h4>
-              <p class="text-muted">Website Design</p>
+              <h4> Resolution Coefficient </h4>
+              <p class="text-muted">Bar</p>
             </div>
           </div>
           <div class="col-md-4 col-sm-6 portfolio-item">
@@ -222,204 +260,204 @@
     </section>
 
     <!-- About -->
-    <section id="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading">About</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <ul class="timeline">
-              <li>
-                <div class="timeline-image">
-                  <img class="rounded-circle img-fluid" src="static/img/about/1.jpg" alt="">
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>2009-2011</h4>
-                    <h4 class="subheading">Our Humble Beginnings</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                  </div>
-                </div>
-              </li>
-              <li class="timeline-inverted">
-                <div class="timeline-image">
-                  <img class="rounded-circle img-fluid" src="static/img/about/2.jpg" alt="">
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>March 2011</h4>
-                    <h4 class="subheading">An Agency is Born</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="timeline-image">
-                  <img class="rounded-circle img-fluid" src="static/img/about/3.jpg" alt="">
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>December 2012</h4>
-                    <h4 class="subheading">Transition to Full Service</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                  </div>
-                </div>
-              </li>
-              <li class="timeline-inverted">
-                <div class="timeline-image">
-                  <img class="rounded-circle img-fluid" src="static/img/about/4.jpg" alt="">
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4>July 2014</h4>
-                    <h4 class="subheading">Phase Two Expansion</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-                  </div>
-                </div>
-              </li>
-              <li class="timeline-inverted">
-                <div class="timeline-image">
-                  <h4>Be Part
-                    <br>Of Our
-                    <br>Story!</h4>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+<!--    <section id="about">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-lg-12 text-center">-->
+<!--            <h2 class="section-heading">About</h2>-->
+<!--            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="col-lg-12">-->
+<!--            <ul class="timeline">-->
+<!--              <li>-->
+<!--                <div class="timeline-image">-->
+<!--                  <img class="rounded-circle img-fluid" src="static/img/about/1.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="timeline-panel">-->
+<!--                  <div class="timeline-heading">-->
+<!--                    <h4>2009-2011</h4>-->
+<!--                    <h4 class="subheading">Our Humble Beginnings</h4>-->
+<!--                  </div>-->
+<!--                  <div class="timeline-body">-->
+<!--                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <li class="timeline-inverted">-->
+<!--                <div class="timeline-image">-->
+<!--                  <img class="rounded-circle img-fluid" src="static/img/about/2.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="timeline-panel">-->
+<!--                  <div class="timeline-heading">-->
+<!--                    <h4>March 2011</h4>-->
+<!--                    <h4 class="subheading">An Agency is Born</h4>-->
+<!--                  </div>-->
+<!--                  <div class="timeline-body">-->
+<!--                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <li>-->
+<!--                <div class="timeline-image">-->
+<!--                  <img class="rounded-circle img-fluid" src="static/img/about/3.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="timeline-panel">-->
+<!--                  <div class="timeline-heading">-->
+<!--                    <h4>December 2012</h4>-->
+<!--                    <h4 class="subheading">Transition to Full Service</h4>-->
+<!--                  </div>-->
+<!--                  <div class="timeline-body">-->
+<!--                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <li class="timeline-inverted">-->
+<!--                <div class="timeline-image">-->
+<!--                  <img class="rounded-circle img-fluid" src="static/img/about/4.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="timeline-panel">-->
+<!--                  <div class="timeline-heading">-->
+<!--                    <h4>July 2014</h4>-->
+<!--                    <h4 class="subheading">Phase Two Expansion</h4>-->
+<!--                  </div>-->
+<!--                  <div class="timeline-body">-->
+<!--                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <li class="timeline-inverted">-->
+<!--                <div class="timeline-image">-->
+<!--                  <h4>Be Part-->
+<!--                    <br>Of Our-->
+<!--                    <br>Story!</h4>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
 
     <!-- Team -->
-    <section class="bg-light" id="team">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Our Amazing Team</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="team-member">
-              <img class="mx-auto rounded-circle" src="static/img/team/1.jpg" alt="">
-              <h4>Kay Garland</h4>
-              <p class="text-muted">Lead Designer</p>
-              <ul class="list-inline social-buttons">
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-linkedin"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="team-member">
-              <img class="mx-auto rounded-circle" src="static/img/team/2.jpg" alt="">
-              <h4>Larry Parker</h4>
-              <p class="text-muted">Lead Marketer</p>
-              <ul class="list-inline social-buttons">
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-linkedin"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="team-member">
-              <img class="mx-auto rounded-circle" src="static/img/team/3.jpg" alt="">
-              <h4>Diana Pertersen</h4>
-              <p class="text-muted">Lead Developer</p>
-              <ul class="list-inline social-buttons">
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-facebook"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="#">
-                    <i class="fa fa-linkedin"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<!--    <section class="bg-light" id="team">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-lg-12 text-center">-->
+<!--            <h2 class="section-heading">Our Amazing Team</h2>-->
+<!--            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="col-sm-4">-->
+<!--            <div class="team-member">-->
+<!--              <img class="mx-auto rounded-circle" src="static/img/team/1.jpg" alt="">-->
+<!--              <h4>Kay Garland</h4>-->
+<!--              <p class="text-muted">Lead Designer</p>-->
+<!--              <ul class="list-inline social-buttons">-->
+<!--                <li class="list-inline-item">-->
+<!--                  <a href="#">-->
+<!--                    <i class="fa fa-twitter"></i>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <a href="#">-->
+<!--                    <i class="fa fa-facebook"></i>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <a href="#">-->
+<!--                    <i class="fa fa-linkedin"></i>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-sm-4">-->
+<!--            <div class="team-member">-->
+<!--              <img class="mx-auto rounded-circle" src="static/img/team/2.jpg" alt="">-->
+<!--              <h4>Larry Parker</h4>-->
+<!--              <p class="text-muted">Lead Marketer</p>-->
+<!--              <ul class="list-inline social-buttons">-->
+<!--                <li class="list-inline-item">-->
+<!--                  <a href="#">-->
+<!--                    <i class="fa fa-twitter"></i>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <a href="#">-->
+<!--                    <i class="fa fa-facebook"></i>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <a href="#">-->
+<!--                    <i class="fa fa-linkedin"></i>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-sm-4">-->
+<!--            <div class="team-member">-->
+<!--              <img class="mx-auto rounded-circle" src="static/img/team/3.jpg" alt="">-->
+<!--              <h4>Diana Pertersen</h4>-->
+<!--              <p class="text-muted">Lead Developer</p>-->
+<!--              <ul class="list-inline social-buttons">-->
+<!--                <li class="list-inline-item">-->
+<!--                  <a href="#">-->
+<!--                    <i class="fa fa-twitter"></i>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <a href="#">-->
+<!--                    <i class="fa fa-facebook"></i>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <a href="#">-->
+<!--                    <i class="fa fa-linkedin"></i>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="col-lg-8 mx-auto text-center">-->
+<!--            <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
 
     <!-- Clients -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3 col-sm-6">
-            <a href="#">
-              <img class="img-fluid d-block mx-auto" src="static/img/logos/envato.jpg" alt="">
-            </a>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <a href="#">
-              <img class="img-fluid d-block mx-auto" src="static/img/logos/designmodo.jpg" alt="">
-            </a>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <a href="#">
-              <img class="img-fluid d-block mx-auto" src="static/img/logos/themeforest.jpg" alt="">
-            </a>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <a href="#">
-              <img class="img-fluid d-block mx-auto" src="static/img/logos/creative-market.jpg" alt="">
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+<!--    <section class="py-5">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-3 col-sm-6">-->
+<!--            <a href="#">-->
+<!--              <img class="img-fluid d-block mx-auto" src="static/img/logos/envato.jpg" alt="">-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-md-3 col-sm-6">-->
+<!--            <a href="#">-->
+<!--              <img class="img-fluid d-block mx-auto" src="static/img/logos/designmodo.jpg" alt="">-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-md-3 col-sm-6">-->
+<!--            <a href="#">-->
+<!--              <img class="img-fluid d-block mx-auto" src="static/img/logos/themeforest.jpg" alt="">-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-md-3 col-sm-6">-->
+<!--            <a href="#">-->
+<!--              <img class="img-fluid d-block mx-auto" src="static/img/logos/creative-market.jpg" alt="">-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
 
     <!-- Contact -->
     <section id="contact">
@@ -522,15 +560,15 @@
               <div class="col-lg-8 mx-auto">
                 <div class="modal-body">
                   <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                  <h2>Most Complain by City</h2>
+                  <p class="item-intro text-muted"> Man vs Brok </p>
                   <img class="img-fluid d-block mx-auto" src="static/img/portfolio/01-full.jpg" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Threads</li>
-                    <li>Category: Illustration</li>
-                  </ul>
+                  <p>This plot descibe the most complain and then group by city.  We first observe that what is the serious issue in all different cities.  Then we see that even though Manhattan is the most populated area, we need more complains is happening in Bronx and Brookyln</p>
+<!--                  <ul class="list-inline">-->
+<!--                    <li>Date: January 2017</li>-->
+<!--                    <li>Client: Threads</li>-->
+<!--                    <li>Category: Illustration</li>-->
+<!--                  </ul>-->
                   <button class="btn btn-primary" data-dismiss="modal" type="button">
                     <i class="fa fa-times"></i>
                     Close Project</button>
@@ -556,15 +594,15 @@
               <div class="col-lg-8 mx-auto">
                 <div class="modal-body">
                   <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                  <h2> Traffic by Location </h2>
+                  <p class="item-intro text-muted"> Specific Problem </p>
                   <img class="img-fluid d-block mx-auto" src="static/img/portfolio/02-full.jpg" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Explore</li>
-                    <li>Category: Graphic Design</li>
-                  </ul>
+                  <p> Now suppose we want to look a specific problem, for example Traffic Complain, we can use the data to observe the general map in Manhattan.</p>
+<!--                  <ul class="list-inline">-->
+<!--                    <li>Date: January 2017</li>-->
+<!--                    <li>Client: Explore</li>-->
+<!--                    <li>Category: Graphic Design</li>-->
+<!--                  </ul>-->
                   <button class="btn btn-primary" data-dismiss="modal" type="button">
                     <i class="fa fa-times"></i>
                     Close Project</button>
@@ -590,15 +628,15 @@
               <div class="col-lg-8 mx-auto">
                 <div class="modal-body">
                   <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                  <h2> Resolution by City </h2>
+                  <p class="item-intro text-muted"> Large number on un-fixed </p>
                   <img class="img-fluid d-block mx-auto" src="static/img/portfolio/03-full.jpg" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Finish</li>
-                    <li>Category: Identity</li>
-                  </ul>
+                  <p> We care about whether our complain will be resolved, let's look at what are the resolution result by City</p>
+<!--                  <ul class="list-inline">-->
+<!--                    <li>Date: January 2017</li>-->
+<!--                    <li>Client: Finish</li>-->
+<!--                    <li>Category: Identity</li>-->
+<!--                  </ul>-->
                   <button class="btn btn-primary" data-dismiss="modal" type="button">
                     <i class="fa fa-times"></i>
                     Close Project</button>
@@ -624,15 +662,16 @@
               <div class="col-lg-8 mx-auto">
                 <div class="modal-body">
                   <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                  <h2> Resolution by City </h2>
+                  <p class="item-intro text-muted"> After Filter </p>
                   <img class="img-fluid d-block mx-auto" src="static/img/portfolio/04-full.jpg" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Lines</li>
-                    <li>Category: Branding</li>
-                  </ul>
+                      <p>  By looking over for keyword, I cateogotize the resolution into different categories.  Only correct, fixed, resolve ect are defined as resolved.  The final number come down to Unlikely to be resolved = 1167132, Will be Resolved = 329182, Inspected, Violation Issued = 160849
+                  </p>
+<!--                  <ul class="list-inline">-->
+<!--                    <li>Date: January 2017</li>-->
+<!--                    <li>Client: Lines</li>-->
+<!--                    <li>Category: Branding</li>-->
+<!--                  </ul>-->
                   <button class="btn btn-primary" data-dismiss="modal" type="button">
                     <i class="fa fa-times"></i>
                     Close Project</button>
@@ -658,15 +697,15 @@
               <div class="col-lg-8 mx-auto">
                 <div class="modal-body">
                   <!-- Project Details Go Here -->
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                  <h2> Model Coefficient </h2>
+                  <p class="item-intro text-muted">Resolution Coefficient</p>
                   <img class="img-fluid d-block mx-auto" src="static/img/portfolio/05-full.jpg" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Southwest</li>
-                    <li>Category: Website Design</li>
-                  </ul>
+                  <p> Again, we care about if the complain we be resolved.  So lets look at what actaully contribute to Resolution.  Here the bar plot for the top 20 features to will be result.</p>
+<!--                  <ul class="list-inline">-->
+<!--                    <li>Date: January 2017</li>-->
+<!--                    <li>Client: Southwest</li>-->
+<!--                    <li>Category: Website Design</li>-->
+<!--                  </ul>-->
                   <button class="btn btn-primary" data-dismiss="modal" type="button">
                     <i class="fa fa-times"></i>
                     Close Project</button>
@@ -719,7 +758,15 @@
 
     <!-- Plugin JavaScript -->
     <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/jquery.nice-select.js"></script>
+<!--    <script>-->
+<!--        $(document).ready(function() {-->
+<!--                          $('select').niceSelect();-->
+<!--                          });-->
+<!--    </script>-->
 
+    
     <!-- Contact form JavaScript -->
     <script src="static/js/jqBootstrapValidation.js"></script>
     <script src="static/js/contact_me.js"></script>
