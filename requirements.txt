@@ -3,7 +3,6 @@ requests==2.9.1
 bokeh==0.12.7 
 python
 sklearn
-pandas
 numpy
 dill
 pandas==0.20.3
