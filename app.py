@@ -2,6 +2,7 @@ from flask import Flask, render_template, request,redirect
 import pandas as pd
 import numpy as np
 import pandas as pd
+import dill
 #import matplotlib.cm as cm
 #from itertools import cycle
 from sklearn.utils import shuffle
@@ -32,37 +33,39 @@ for each in Man_zipcodes:
 for each in complain_agencys:
     ang[each] = 0
 
-# Read in Table
-df_model = pd.read_csv('model.csv')
+## Read in Table
+#df_model = pd.read_csv('model.csv')
+#
+## Get Dummies
+#df_resol = pd.get_dummies(df_model['Resolution'])
+#df_agency = pd.get_dummies(df_model['Agency'])
+#df_complaint = pd.get_dummies(df_model['Complaint_Type'])
+#df_zipcode = pd.get_dummies(df_model['Incident_Zip'])
+#
+## Concate
+#df_x = pd.concat([df_model[['hours']],
+#                  df_agency,df_complaint,df_zipcode],axis=1)
+#
+## Set X, y
+#X = df_x
+#y = df_resol
+#
+#for i, col in enumerate(y.columns.tolist(), 1):
+#    y.loc[:, col] *= i
+#y = y.sum(axis=1)
+#
+#random_state = np.random.RandomState(0)
+## Construct training and testing set.
+#X, y = shuffle(X, y, random_state=random_state)
+#n_samples, n_features = X.shape
+#half = int(n_samples/1.2)
+#X_train, X_test = X[:half], X[half:]
+#y_train, y_test = y[:half], y[half:]
+#
+#clf = LogisticRegression(multi_class = 'multinomial', solver='lbfgs')
+#clf.fit(X_train, y_train)
 
-# Get Dummies
-df_resol = pd.get_dummies(df_model['Resolution'])
-df_agency = pd.get_dummies(df_model['Agency'])
-df_complaint = pd.get_dummies(df_model['Complaint_Type'])
-df_zipcode = pd.get_dummies(df_model['Incident_Zip'])
-
-# Concate
-df_x = pd.concat([df_model[['hours']],
-                  df_agency,df_complaint,df_zipcode],axis=1)
-
-# Set X, y
-X = df_x
-y = df_resol
-
-for i, col in enumerate(y.columns.tolist(), 1):
-    y.loc[:, col] *= i
-y = y.sum(axis=1)
-
-random_state = np.random.RandomState(0)
-# Construct training and testing set.
-X, y = shuffle(X, y, random_state=random_state)
-n_samples, n_features = X.shape
-half = int(n_samples/1.2)
-X_train, X_test = X[:half], X[half:]
-y_train, y_test = y[:half], y[half:]
-
-clf = LogisticRegression(multi_class = 'multinomial', solver='lbfgs')
-clf.fit(X_train, y_train)
+estimator = dill.load(open('estimator.dill', 'r'))
 
 # Index page
 @app.route('/',methods=['GET','POST'])
@@ -87,7 +90,8 @@ def result():
     input += ang.values()
     input += com.values()
     input += zip.values()
-    out = clf.predict_proba(input)*100
+    out = estimator.predict_proba(input)*100
+#    out = clf.predict_proba(input)*100
     resolve_rate = out[0][-1]
     fail_rate = out[0][1]
     violation_rate = out[0][3]

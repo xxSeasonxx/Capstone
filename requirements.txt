@@ -3,6 +3,7 @@ requests==2.9.1
 bokeh==0.12.7 
 python
 sklearn
+dill
 numpy
 pandas==0.20.3
 flask
