@@ -2,8 +2,8 @@ from flask import Flask, render_template, request,redirect
 import pandas as pd
 import numpy as np
 import pandas as pd
-import matplotlib.cm as cm
-from itertools import cycle
+#import matplotlib.cm as cm
+#from itertools import cycle
 from sklearn.utils import shuffle
 from sklearn.linear_model import LogisticRegression
 from collections import OrderedDict
