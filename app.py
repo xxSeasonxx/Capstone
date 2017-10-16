@@ -32,37 +32,37 @@ for each in Man_zipcodes:
 for each in complain_agencys:
     ang[each] = 0
 
-## Read in Table
-#df_model = pd.read_csv('model.csv')
-#
-## Get Dummies
-#df_resol = pd.get_dummies(df_model['Resolution'])
-#df_agency = pd.get_dummies(df_model['Agency'])
-#df_complaint = pd.get_dummies(df_model['Complaint_Type'])
-#df_zipcode = pd.get_dummies(df_model['Incident_Zip'])
+# Read in Table
+df_model = pd.read_csv('model.csv')
 
-## Concate
-#df_x = pd.concat([df_model[['hours']],
-#                  df_agency,df_complaint,df_zipcode],axis=1)
-#
-## Set X, y
-#X = df_x
-#y = df_resol
+# Get Dummies
+df_resol = pd.get_dummies(df_model['Resolution'])
+df_agency = pd.get_dummies(df_model['Agency'])
+df_complaint = pd.get_dummies(df_model['Complaint_Type'])
+df_zipcode = pd.get_dummies(df_model['Incident_Zip'])
 
-#for i, col in enumerate(y.columns.tolist(), 1):
-#    y.loc[:, col] *= i
-#y = y.sum(axis=1)
+# Concate
+df_x = pd.concat([df_model[['hours']],
+                  df_agency,df_complaint,df_zipcode],axis=1)
 
-#random_state = np.random.RandomState(0)
-## Construct training and testing set.
-#X, y = shuffle(X, y, random_state=random_state)
-#n_samples, n_features = X.shape
-#half = int(n_samples/1.2)
-#X_train, X_test = X[:half], X[half:]
-#y_train, y_test = y[:half], y[half:]
+# Set X, y
+X = df_x
+y = df_resol
 
-#clf = LogisticRegression(multi_class = 'multinomial', solver='lbfgs')
-#clf.fit(X_train, y_train)
+for i, col in enumerate(y.columns.tolist(), 1):
+    y.loc[:, col] *= i
+y = y.sum(axis=1)
+
+random_state = np.random.RandomState(0)
+# Construct training and testing set.
+X, y = shuffle(X, y, random_state=random_state)
+n_samples, n_features = X.shape
+half = int(n_samples/1.2)
+X_train, X_test = X[:half], X[half:]
+y_train, y_test = y[:half], y[half:]
+
+clf = LogisticRegression(multi_class = 'multinomial', solver='lbfgs')
+clf.fit(X_train, y_train)
 
 # Index page
 @app.route('/',methods=['GET','POST'])
@@ -71,13 +71,13 @@ def index():
         return render_template("index.html" ,complaint_types=complaint_types,Man_zipcodes= Man_zipcodes, complain_times = complain_times, complain_agencys = complain_agencys)
     else:
         app.vars['complaint_type'] = request.form["complaint_type"]
-#        app.vars['zipcode'] = request.form["zipcode"]
-#        app.vars['time'] = request.form["time"]
-#        app.vars['agency'] = request.form["agency"]
-#
-#        com[app.vars['complaint_type'] ] = 1
-#        zip[app.vars['zipcode'] ] = 1
-#        ang[app.vars['agency']] = 1
+        app.vars['zipcode'] = request.form["zipcode"]
+        app.vars['time'] = request.form["time"]
+        app.vars['agency'] = request.form["agency"]
+
+        com[app.vars['complaint_type'] ] = 1
+        zip[app.vars['zipcode'] ] = 1
+        ang[app.vars['agency']] = 1
         return redirect('/result')
 #        return render_template("model.html")
 
@@ -87,13 +87,13 @@ def result():
     input += ang.values()
     input += com.values()
     input += zip.values()
-#    out = clf.predict_proba(input)*100
-#    resolve_rate = out[0][-1]
-#    fail_rate = out[0][1]
-#    violation_rate = out[0][3]
-#    noviolation_rate = out[0][2]
-#    duplicate_rate = out[0][0]
-#    tbd_rate = out[0][-2]
+    out = clf.predict_proba(input)*100
+    resolve_rate = out[0][-1]
+    fail_rate = out[0][1]
+    violation_rate = out[0][3]
+    noviolation_rate = out[0][2]
+    duplicate_rate = out[0][0]
+    tbd_rate = out[0][-2]
     return render_template("model.html", complaint = app.vars['complaint_type'],
                                zipcode = app.vars['zipcode'], time =app.vars['time'] , agency = app.vars['agency'],resolve_rate=resolve_rate,fail_rate = fail_rate, violation_rate=violation_rate, noviolation_rate=noviolation_rate,duplicate_rate=duplicate_rate,tbd_rate = tbd_rate )
 
