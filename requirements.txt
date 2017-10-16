@@ -6,6 +6,7 @@ sklearn
 numpy
 dill
 pandas==0.20.3
+scipy
 flask
 jinja2
 pip
