@@ -2,11 +2,11 @@ from flask import Flask, render_template, request,redirect
 import pandas as pd
 import numpy as np
 import pandas as pd
-import dill
 #import matplotlib.cm as cm
 #from itertools import cycle
 from sklearn.utils import shuffle
 from sklearn.linear_model import LogisticRegression
+from sklearn.externals import joblib
 from collections import OrderedDict
 
 #from bokeh.embed import components
@@ -65,8 +65,8 @@ for each in complain_agencys:
 #clf = LogisticRegression(multi_class = 'multinomial', solver='lbfgs')
 #clf.fit(X_train, y_train)
 
-estimator = dill.load(open('estimator.dill', 'r'))
-
+#estimator = dill.load(open('estimator.dill', 'r'))
+estimator = joblib.load('filename.pkl')
 # Index page
 @app.route('/',methods=['GET','POST'])
 def index():
